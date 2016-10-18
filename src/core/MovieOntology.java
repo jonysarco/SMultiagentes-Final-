@@ -4,6 +4,7 @@ import jade.content.lang.sl.SLCodec;
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Introspector;
 import jade.content.onto.Ontology;
+import jade.content.schema.AgentActionSchema;
 import jade.content.schema.ConceptSchema;
 import jade.content.schema.PrimitiveSchema;
 

@@ -1,8 +1,8 @@
 package agents;
 import java.util.Vector;
 
+import fsm.FSM;
 import jade.core.Agent;
-import stateMachines.InitiatorStateMachine;
 
 public class Initiator extends Agent{
 	
@@ -19,7 +19,7 @@ public class Initiator extends Agent{
 		movies.add("Lo que el viento se llevo");
 		
 		//Agrego comportamiento al agente
-		addBehaviour(new InitiatorStateMachine(this.movies));
+		//addBehaviour(new FSM(this.movies));
 		System.out.println("El agente"+this.getAID().getName()+" se encuentra activo");
 	}
 }
