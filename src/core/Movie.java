@@ -1,5 +1,7 @@
 package core;
 
-public class Movie {
+import jade.content.Concept;
+
+public class Movie implements Concept{
 
 }
