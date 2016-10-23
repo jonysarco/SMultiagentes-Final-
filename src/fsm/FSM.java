@@ -1,24 +1,38 @@
 package fsm;
 
+import java.util.Vector;
+
 import behaviors.BehaviourEvaluatePropose;
 import behaviors.BehaviourFinalState;
 import behaviors.BehaviourReceiveZeuthen;
 import behaviors.BehaviourSendPropose;
 import behaviors.BehaviourSendResponse;
 import behaviors.BehaviourSendZeuthen;
+import behaviors.BehaviourStartPropose;
 import behaviors.BehaviourWaitPropose;
+import behaviors.BehaviourWaitProposeStart;
 import behaviors.BehaviourWaitResponse;
 import jade.core.behaviours.DataStore;
 import jade.core.behaviours.FSMBehaviour;
+import agents.PeliVal;
 
 public class FSM extends FSMBehaviour	{
 	
-	public FSM()	{
+	public FSM(Vector<PeliVal> mov, String tipoAgente, String responder)	{
 		
 		//Defino Data Store
 		DataStore ds = new DataStore();
 
+				
 		//Defino los comportamientos de la maquina de estados.
+		
+		//Nuevos estados creados TIMOTEO
+		BehaviourWaitProposeStart bwps = new BehaviourWaitProposeStart();
+		bwps.setDataStore(ds);
+		BehaviourStartPropose bstp = new BehaviourStartPropose(mov, responder);
+		bstp.setDataStore(ds);
+		
+		
 		BehaviourEvaluatePropose bep = new BehaviourEvaluatePropose();
 		bep.setDataStore(ds);
 		BehaviourFinalState bfs = new BehaviourFinalState();
@@ -36,6 +50,18 @@ public class FSM extends FSMBehaviour	{
 		BehaviourWaitResponse bwr = new BehaviourWaitResponse();
 		bwr.setDataStore(ds);
 
+		
+		//Seteo los estados de comienzo de los agentes, dependiendo del tipo que es. TIMOTEO
+		if(tipoAgente.equals("Responder")){
+			//Estado de comienzo del agente Responder
+			this.registerFirstState(bwps, "StartResponder");
+		}
+		else if(tipoAgente.equals("Initiator")){
+			//Estado de comienzo del agente Initiator
+			this.registerFirstState(bstp, "StartInitiator");
+		}
+		
+		
 		//Agrego los diferentes estados a la FSM.
 		this.registerFirstState( bsp , "Send Propose");
 		this.registerState(bwr, "Wait Response");

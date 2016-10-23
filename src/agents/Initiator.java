@@ -1,48 +1,101 @@
 package agents;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
 import jade.core.Agent;
 import jade.domain.DFService;
-import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
+import java.util.Random;
+
 public class Initiator extends Agent{
 	
-	private Vector<String> movies;
+	//private Hashtable<String, Integer> peliculas = new Hashtable<String, Integer>();
+	private Vector<PeliVal> coleccion;
 	
 	protected void setup()
     {
-		try {
-			ServiceDescription service = new ServiceDescription();
-			service.setType("negociacion");
-			service.setName("peliculas");
-
-			//Plantilla de descripción que busca el agente
-			DFAgentDescription template = new DFAgentDescription();
-
-			//Servicio que busca el agente
-			template.addServices(service);
-
-			//Todas las descripciones que encajan con la plantilla proporcionada en el DF
-			DFAgentDescription[] results = DFService.search(this, template);
-
-			if (results.length == 0)
-				System.out.println("Ningun agente ofrece el servicio deseado");
-			for (int i = 0; i < results.length; ++i)	{
-				System.out.println("El agente "+results[i].getName()+" ofrece los siguientes servicios:");
-				Iterator services = results[i].getAllServices();
-				int j = 1;
-				while(services.hasNext())	{
-					service = (ServiceDescription)services.next();
-					System.out.println(j+"- "+service.getName());
-					System.out.println();
-					j++;
-				}
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		Random rn = new Random();
+		 
+		int value = rn.nextInt(10) + 1;
+		coleccion.addElement(new PeliVal("Rambo 1", value));
+		value = rn.nextInt(10) + 1;
+		coleccion.addElement(new PeliVal("Rocky I", value));
+		value = rn.nextInt(10) + 1;
+		coleccion.addElement(new PeliVal("El secreto de sus ojos", value));
+		value = rn.nextInt(10) + 1;
+		coleccion.addElement(new PeliVal("Matrix", value));
+		value = rn.nextInt(10) + 1;
+		coleccion.addElement(new PeliVal("Tarzan", value));
+		value = rn.nextInt(10) + 1;
+		coleccion.addElement(new PeliVal("El libro de la selva", value));
+		
+		Collections.sort(coleccion); //acá ordeno las peliculas por puntaje descendentemente
+		
+		
+		 // Plantilla de descripción que busca el agente
+        DFAgentDescription template = new DFAgentDescription();
+		
+		// Descripcion de un servicio se proporciona
+        ServiceDescription servicio = new ServiceDescription();
+        
+        servicio.setType("negociacion");
+        servicio.setName("peliculas");
+             
+        // Servicio que busca el agente
+        template.addServices(servicio);
+	 try
+	    {
+	      // Todas las descripciones que encajan con la plantilla proporcionada en el DF
+	          DFAgentDescription[] resultados = DFService.search(this, template);
+	        		  
+	 
+	          if (resultados.length == 0){
+	        	  System.out.println("Ningun agente ofrece el servicio deseado, por lo tanto me registro");
+	        	// Descripción del agente
+	              DFAgentDescription descripcion = new DFAgentDescription();
+	              descripcion.setName(getAID()); 
+	       
+	          	// Añade dicho servicio a la lista de servicios de la descripción del agente
+	              descripcion.addServices(servicio);
+	              
+	           // creo que debo pasar a la maquina de estados y quedarme esperando a la llegada un mensaje propose   
+	              	                            
+	              //addBehaviour(new FSM(this.coleccion, "Responder", "null"));
+	          }
+	          else{    
+	        	  for (int i = 0; i < resultados.length; ++i)
+	        	  {
+	        		  System.out.println("El agente "+resultados[i].getName()+" ofrece los siguientes servicios:");
+	        		  
+	        		// creo que debo pasar a la maquina de estados, junto con el usuario al que le voy a mandar un mensaje Propose  
+                        
+		              //addBehaviour(new FSM(this.coleccion, "Initiator", resultados[i].getName()));
+	        		  
+	        		 
+	        		  
+	        		  
+	        		  
+	        		  /*Iterator servicios = resultados[i].getAllServices();
+	        		  int j = 1;
+	        		  while(servicios.hasNext())
+	        		  {
+	        			  servicio = (ServiceDescription)servicios.next();
+	        			  System.out.println(j+"- "+servicio.getName());
+	        			  System.out.println();
+	        			  j++;
+	        		  }*/
+	        	  }
+	          }
+	    }
+	    catch (Exception e)
+	    {
+	      e.printStackTrace();
+	    }
     }
 }
