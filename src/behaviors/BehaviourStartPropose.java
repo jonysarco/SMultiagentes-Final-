@@ -17,7 +17,7 @@ public class BehaviourStartPropose extends Behaviour	{
 		super();
 		coleccion = mov;
 		name = responder;
-		//estado = 0;
+		
 		//fin = false;
 	} 
 		
@@ -29,7 +29,9 @@ public class BehaviourStartPropose extends Behaviour	{
 		contador = 0;
         if ( contador < coleccion.size() )	{  
 		     //Creo el mensaje 
-       	         	 
+        	 
+        	 getDataStore().put("contador", contador);//envío la posición de la lista que voy recorriendo al siguiente estado
+        	 
 	       	 ACLMessage mensaje = new ACLMessage(ACLMessage.PROPOSE);
 	       	 mensaje.setSender(myAgent.getAID());
 	       	 mensaje.setLanguage("Español");
@@ -39,12 +41,15 @@ public class BehaviourStartPropose extends Behaviour	{
 	       	 mensaje.setReplyWith("A-001");
 	       	 //Envio el mensaje
 	       	 myAgent.send(mensaje);
-	       	 estado = 0;
+	       	 estado = 10;
 	       	 System.out.println("Se envia una propuesta al agente " + id.getName());
         }
         
 	}
 
+	public int onEnd() {
+		return estado ;
+	}
 	
 	//Debo pasar si o si al estado Esperar Respuesta
 	

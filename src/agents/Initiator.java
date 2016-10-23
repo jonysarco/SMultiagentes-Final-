@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
+import fsm.FSM;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -66,7 +67,7 @@ public class Initiator extends Agent{
 	              
 	           // creo que debo pasar a la maquina de estados y quedarme esperando a la llegada un mensaje propose   
 	              	                            
-	              //addBehaviour(new FSM(this.coleccion, "Responder", "null"));
+	              addBehaviour(new FSM(this.coleccion, "Responder", "null"));
 	          }
 	          else{    
 	        	  for (int i = 0; i < resultados.length; ++i)
@@ -75,7 +76,7 @@ public class Initiator extends Agent{
 	        		  
 	        		// creo que debo pasar a la maquina de estados, junto con el usuario al que le voy a mandar un mensaje Propose  
                         
-		              //addBehaviour(new FSM(this.coleccion, "Initiator", resultados[i].getName()));
+		            addBehaviour(new FSM(this.coleccion, "Initiator", resultados[i].getName().toString()));
 	        		  
 	        		 
 	        		  

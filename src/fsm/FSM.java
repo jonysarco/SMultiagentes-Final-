@@ -43,7 +43,7 @@ public class FSM extends FSMBehaviour	{
 		bsp.setDataStore(ds);
 		BehaviourSendResponse bsr = new BehaviourSendResponse();
 		bsr.setDataStore(ds);
-		BehaviourSendZeuthen bsz = new BehaviourSendZeuthen();
+		BehaviourSendZeuthen bsz = new BehaviourSendZeuthen(mov);
 		bsz.setDataStore(ds);
 		BehaviourWaitPropose bwp = new BehaviourWaitPropose();
 		bwp.setDataStore(ds);
