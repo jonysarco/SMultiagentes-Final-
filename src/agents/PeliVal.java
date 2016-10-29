@@ -28,4 +28,13 @@ public class PeliVal implements Comparable<PeliVal>{
         }
         return 0;
     }
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		String o1 = (String) obj;
+		if(o1.equals(name))
+			return true;
+		return false;
+	}
 }

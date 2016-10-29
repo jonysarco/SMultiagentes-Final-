@@ -39,9 +39,9 @@ public class FSM extends FSMBehaviour	{
 		bfs.setDataStore(ds);
 		BehaviourReceiveZeuthen brz = new BehaviourReceiveZeuthen();
 		brz.setDataStore(ds);
-		BehaviourSendPropose bsp = new BehaviourSendPropose();
+		BehaviourSendPropose bsp = new BehaviourSendPropose(mov);
 		bsp.setDataStore(ds);
-		BehaviourSendResponse bsr = new BehaviourSendResponse();
+		BehaviourSendResponse bsr = new BehaviourSendResponse(mov);
 		bsr.setDataStore(ds);
 		BehaviourSendZeuthen bsz = new BehaviourSendZeuthen(mov);
 		bsz.setDataStore(ds);
@@ -53,23 +53,25 @@ public class FSM extends FSMBehaviour	{
 		
 		//Seteo los estados de comienzo de los agentes, dependiendo del tipo que es. TIMOTEO
 		if(tipoAgente.equals("Responder")){
+			
 			//Estado de comienzo del agente Responder
-			this.registerFirstState(bwps, "StartResponder");
+			this.registerFirstState(bwps, "Start Responder");
 		}
 		else if(tipoAgente.equals("Initiator")){
 			//Estado de comienzo del agente Initiator
-			this.registerFirstState(bstp, "StartInitiator");
+			this.registerFirstState(bstp, "Start Initiator");
 		}
 		
 		
 		//Agrego los diferentes estados a la FSM.
-		this.registerFirstState( bsp , "Send Propose");
+		this.registerState( bsp , "Send Propose");
 		this.registerState(bwr, "Wait Response");
 		this.registerState(bsz,"Send Zeuthen");
 		this.registerState(brz, "Receive Zeuthen");
 		this.registerState(bwp, "Wait Propose");
 		this.registerState(bsr, "Send Response");
-		this.registerState(bfs, "Final State");
+		this.registerLastState(bfs, "Final State");
+		//this.registerState(bwps, "Start Init");
 
 		//Defino transicion de estados.
 		this.registerTransition("Send Propose", "Wait Response", 0);
@@ -82,6 +84,12 @@ public class FSM extends FSMBehaviour	{
 		this.registerTransition("Wait Propose", "Send Response", 7);
 		this.registerTransition("Send Response", "Send Zeuthen", 8);
 		this.registerTransition("Send Response", "Final State", 9);
-		
+		this.registerTransition("Start Initiator", "Wait Response", 10);
+		this.registerTransition("Wait Propose", "Final State", 12);
+		this.registerTransition("Wait Propose", "Wait Propose", 13);
+		this.registerTransition("Wait Response", "Wait Response", 14);
+		this.registerTransition("Receive Zeuthen", "Receive Zeuthen", 15);
+		this.registerTransition("Start Responder", "Start Responder", 16);
+		this.registerTransition("Start Responder", "Send Response", 17);
 	}
 }

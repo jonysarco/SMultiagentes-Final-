@@ -18,7 +18,7 @@ public class BehaviourStartPropose extends Behaviour	{
 		coleccion = mov;
 		name = responder;
 		
-		//fin = false;
+		fin = false;
 	} 
 		
 	@Override
@@ -31,18 +31,19 @@ public class BehaviourStartPropose extends Behaviour	{
 		     //Creo el mensaje 
         	 
         	 getDataStore().put("contador", contador);//envío la posición de la lista que voy recorriendo al siguiente estado
-        	 
 	       	 ACLMessage mensaje = new ACLMessage(ACLMessage.PROPOSE);
 	       	 mensaje.setSender(myAgent.getAID());
 	       	 mensaje.setLanguage("Español");
 	       	 mensaje.addReceiver(id);
-	       	 mensaje.setContent(coleccion.get(contador).getName());
+	       	 mensaje.setContent(coleccion.get(contador).getName()); //Envio el nombre de la película de mi lista
 	      	 mensaje.setConversationId("AB-1");
 	       	 mensaje.setReplyWith("A-001");
 	       	 //Envio el mensaje
 	       	 myAgent.send(mensaje);
 	       	 estado = 10;
-	       	 System.out.println("Se envia una propuesta al agente " + id.getName());
+	       	 System.out.println(myAgent.getLocalName() + " envia una propuesta al agente: " + id.getLocalName() + " ---- BehaviourStartPropose ");
+	       	 System.out.println("------------ La pelicula propuesta es: " + coleccion.get(contador).getName());
+	       	 fin = true;
         }
         
 	}
@@ -51,13 +52,10 @@ public class BehaviourStartPropose extends Behaviour	{
 		return estado ;
 	}
 	
-	//Debo pasar si o si al estado Esperar Respuesta
-	
 	
 	@Override
 	public boolean done() {
-		// TODO Auto-generated method stub
-		return false;
+		return fin;
 	}
 
 }

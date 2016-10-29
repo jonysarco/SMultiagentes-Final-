@@ -8,7 +8,7 @@ import jade.lang.acl.ACLMessage;
 
 public class BehaviourWaitResponse extends Behaviour {
 	
-	private int contador,estado;
+	private int contador, estado;
 	private boolean fin;
 	private static final Integer Clave = 1;
 	
@@ -19,26 +19,35 @@ public class BehaviourWaitResponse extends Behaviour {
 		
 	@Override
 	public void action() {
-		ACLMessage mensaje = myAgent.receive();
-        if (mensaje!= null)
+		ACLMessage mensaje = myAgent.receive();  //Recibo el mensaje de respuesta del otro agente
+        if (mensaje != null)
         {
-            System.out.println(myAgent.getLocalName() + ": recibió el mensaje : ");
-            System.out.println(mensaje.toString());
-            getDataStore().put(Clave, mensaje);
+        	
+            //System.out.println(myAgent.getLocalName() + ": recibió el mensaje Responder:  ---- BehaviourWaitResponse");
+            //System.out.println(mensaje.toString());
+            
             if(mensaje.getPerformative()==ACLMessage.ACCEPT_PROPOSAL){ 
-           	//Pasar a estado final
-           	 estado=2;
+	           	//Pasar a estado final
+            	System.out.println(myAgent.getLocalName() + ": recibió un mensaje de aceptaion :  ---- BehaviourWaitResponse");
+            	String movie = "Pelicula"; 
+            	estado=2;
+	           	getDataStore().put(movie, mensaje.getContent());
+	           	getDataStore().put("decision", true); //paso al estado final avisando que se acepto la pelicula
             }                
-            else{ 
-            //pasar a Calcular y enviar Zeuthen	
+            else
+            { 
             	
-            estado=3;
+            	System.out.println(myAgent.getLocalName() + ": recibió un mensaje de rechazo :  ---- BehaviourWaitResponse");
+	         	getDataStore().put(Clave, mensaje);  //paso al siguiente estado el mensaje que recibí
+	            
+	         	estado=3; //pasar a Calcular y enviar Zeuthen         
             } 
            fin = true;
         }
         else
         {
-            System.out.println("El agente " +  myAgent.getLocalName() + " esta esperando la respuesta ");
+        	estado = 14; //debo ciclar en el estado esperando la llegada del mensaje de respuesta
+            System.out.println(myAgent.getLocalName() + " esta esperando el mansaje de RESPUESTA ---- BehaviourWaitResponse ");
             block();
             
         }		
@@ -51,5 +60,5 @@ public class BehaviourWaitResponse extends Behaviour {
 	}
 	public int onEnd() {
 		return estado ;
-		}
+	}
 }
