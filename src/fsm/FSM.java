@@ -2,7 +2,6 @@ package fsm;
 
 import java.util.Vector;
 
-import behaviors.BehaviourEvaluatePropose;
 import behaviors.BehaviourFinalState;
 import behaviors.BehaviourReceiveZeuthen;
 import behaviors.BehaviourSendPropose;
@@ -33,8 +32,6 @@ public class FSM extends FSMBehaviour	{
 		bstp.setDataStore(ds);
 		
 		
-		BehaviourEvaluatePropose bep = new BehaviourEvaluatePropose();
-		bep.setDataStore(ds);
 		BehaviourFinalState bfs = new BehaviourFinalState();
 		bfs.setDataStore(ds);
 		BehaviourReceiveZeuthen brz = new BehaviourReceiveZeuthen();

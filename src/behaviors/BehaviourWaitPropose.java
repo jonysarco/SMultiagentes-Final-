@@ -16,7 +16,7 @@ public class BehaviourWaitPropose extends Behaviour	{
 	@Override
 	public void action() {
 		// TODO Auto-generated method stub
-		System.out.println(myAgent.getLocalName() + " esta esperando la propuesta de una pelicula ---- BehaviourWaitPropose " );
+		//System.out.println(myAgent.getLocalName() + " esta esperando la propuesta de una pelicula ---- BehaviourWaitPropose " );
 		
 		ACLMessage mensaje = myAgent.receive();
 		
@@ -25,6 +25,7 @@ public class BehaviourWaitPropose extends Behaviour	{
 			 fin = true;
 			 //getDataStore().put(Clave, mensaje); 
 			 if(mensaje.getPerformative()==ACLMessage.PROPOSE){
+				 getDataStore().put(Clave, mensaje);
 				 System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose ---- BehaviourWaitPropose " );
 	           	 estado=7; //paso al estado SendResponse para evaluar la proposición
 			 }

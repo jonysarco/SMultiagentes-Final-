@@ -36,7 +36,7 @@ public class BehaviourSendResponse extends Behaviour{
 			int Xj =  valorPelicula(Coleccion, pelicula_Xj);//Obtengo mi puntaje para la pelicula ofrecida
 			int Xi = Coleccion.get(contador).getValor(); //Obtengo el puntaje de la pelicula donde tengo el contador
 			
-			System.out.println("El valor de la pelicula ofrecida es: " + Xj + " El valor de su pelicula es: " + Xi);
+			//System.out.println("El valor de la pelicula ofrecida es: " + Xj + " El valor de su pelicula es: " + Xi);
 			
 			
 			ACLMessage respuesta = mensaje.createReply();

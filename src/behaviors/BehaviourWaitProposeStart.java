@@ -30,15 +30,16 @@ public class BehaviourWaitProposeStart extends Behaviour	{
 			 getDataStore().put(Clave, mensaje);
 			 if(mensaje.getPerformative()==ACLMessage.PROPOSE){ 
 				 int contador = 0;
-				 System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose ---- START PROPOSE");
+				 System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose ---- BehaviourWaitProposeStart");
 				 getDataStore().put("contador", contador);//envío la posición de la lista que voy recorriendo al siguiente estado
 				 //Debe pasar al estado Evaluar propuesta y responder
 				 estado=17; 
 			 }
 			 else
 			 {
+				 //No anbada si se lo sacabamos.
 				 estado = 16;
-				 System.out.println("ME quedo ciclando ---- ");
+				 System.out.println("Quedo esperando ---- BehaviourWaitProposeStart");
 			 }
          }
          else
@@ -46,7 +47,7 @@ public class BehaviourWaitProposeStart extends Behaviour	{
         	 //continua esperando recibir un mensaje, cicla en ese estado
         	
         	 estado=16;
-             System.out.println(myAgent.getLocalName() +": se queda ciclando esperando un mensaje PROPOSE ---- START PROPOSE ");
+             System.out.println(myAgent.getLocalName() +"Quedo esperando ---- BehaviourWaitProposeStart");
              block();                 
          }		
 

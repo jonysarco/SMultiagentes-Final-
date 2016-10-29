@@ -13,8 +13,6 @@ public class BehaviourFinalState extends Behaviour {
 		this.fin = false;
 	}
 	
-	
-	
 	@Override
 	public void action() {
 		//debo obtener el nombre de la pelicula con la cual hubo acuerdo

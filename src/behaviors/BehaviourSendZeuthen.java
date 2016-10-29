@@ -27,20 +27,24 @@ public class BehaviourSendZeuthen extends Behaviour	{
 		if(mensaje != null){
 			
 			//Primero calculamos Zeuthen
-			System.out.println(myAgent.getLocalName() + ": Esta calculando su Zeuthen  ---- BehaviourSendZeuthen ");
+			//System.out.println(myAgent.getLocalName() + ": Esta calculando su Zeuthen  ---- BehaviourSendZeuthen ");
 			String pelicula_Xj = mensaje.getContent();
-			System.out.println("pelicula: " + pelicula_Xj + " ---- BEhaviourSendZeuthen ");
+			//System.out.println("pelicula: " + pelicula_Xj + " ---- BEhaviourSendZeuthen ");
 			
 			
-			int Xj = valorPelicula(Coleccion, pelicula_Xj);  //Obtengo mi puntaje para la pelicula ofrecida
+			float Xj = valorPelicula(Coleccion, pelicula_Xj);  //Obtengo mi puntaje para la pelicula ofrecida
 					
-			int Xi = Coleccion.get(contador).getValor(); //Obtengo el puntaje de la pelicula donde tengo el contador
+			float Xi = Coleccion.get(contador).getValor(); //Obtengo el puntaje de la pelicula donde tengo el contador
+
+			System.out.println("El valor de la pelicula Xi: "+Xi+ " --- BehaviourSendZeuthen");
+			System.out.println("El valor de la pelicula Xj: "+Xj+"--- BehaviourSendZeuthen");
 			
-			Zeuthen = (((float)Xi - (float)Xj) / (float)Xi); //Si no anda bien
+			//Zeuthen = (((float)Xi - (float)Xj) / (float)Xi); //Si no anda bien
+			Zeuthen = (Xi-Xj)/Xi;
 			
 			getDataStore().put("Zeuthen", Zeuthen);  //Debo pasar el Zeuthen al siguiente estado.
 						
-			System.out.println(myAgent.getLocalName() + ": ha calculado su Zeuthen " + Zeuthen +" ---- BehaviourSendZeuthen ");
+			//System.out.println(myAgent.getLocalName() + ": ha calculado su Zeuthen " + Zeuthen +" ---- BehaviourSendZeuthen ");
 	//---
 			//Envia mensaje con el Zeuthen calculado al otro agente
 			ACLMessage respuesta = mensaje.createReply();
@@ -49,8 +53,7 @@ public class BehaviourSendZeuthen extends Behaviour	{
             String SZeuthen = Float.toString(Zeuthen);  
             respuesta.setContent(SZeuthen);
             myAgent.send(respuesta); 
-            System.out.println(myAgent.getLocalName() +": Envio su Zeuthen al otro agente ---- BehaviourSendZeuthen " );
-         	
+            System.out.println(myAgent.getLocalName() +": Envio su Zeuthen: "+Zeuthen+ "al otro agente---- BehaviourSendZeuthen " );
             estado = 4; //paso al siguiente estado con la idea de esperar el Zeuthen del siguiente agente.
 			fin = true;
 		}
@@ -97,7 +100,4 @@ public class BehaviourSendZeuthen extends Behaviour	{
 	public int onEnd() {
 		return estado;
 	}
-	
-	
-
 }

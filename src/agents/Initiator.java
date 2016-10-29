@@ -38,7 +38,8 @@ public class Initiator extends Agent{
 
 		Collections.sort(coleccion); //acá ordeno las peliculas por puntaje descendentemente
 
-
+		//imprimirPeliculas(coleccion);
+		
 		// Plantilla de descripción que busca el agente
 		DFAgentDescription template = new DFAgentDescription();
 
@@ -100,4 +101,14 @@ public class Initiator extends Agent{
 			e.printStackTrace();
 		}
 	}
+	
+	public void imprimirPeliculas(Vector<PeliVal> peliculas)
+	{
+		for(int i = 0; i < 6; i++)
+		{
+			System.out.println(peliculas.get(i).getName() + "   "+ peliculas.get(i).getValor());
+			
+		}
+	}
+	
 }

@@ -28,7 +28,7 @@ public class BehaviourWaitResponse extends Behaviour {
             
             if(mensaje.getPerformative()==ACLMessage.ACCEPT_PROPOSAL){ 
 	           	//Pasar a estado final
-            	System.out.println(myAgent.getLocalName() + ": recibió un mensaje de aceptaion :  ---- BehaviourWaitResponse");
+            	System.out.println(myAgent.getLocalName() + ": recibió un mensaje de aceptacion :  ---- BehaviourWaitResponse");
             	String movie = "Pelicula"; 
             	estado=2;
 	           	getDataStore().put(movie, mensaje.getContent());
