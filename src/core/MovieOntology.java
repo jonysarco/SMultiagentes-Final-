@@ -35,7 +35,6 @@ public class MovieOntology extends Ontology {
 	public MovieOntology() {
 		super(ONTOLOGY_NAME, BasicOntology.getInstance());
 		try {			
-			
 			ConceptSchema cs = new ConceptSchema(MOVIE);
 			cs.add(MOVIE_NAME, (PrimitiveSchema)getSchema(BasicOntology.STRING), PrimitiveSchema.MANDATORY);
 			cs.add(MOVIE_YEAR, (PrimitiveSchema)getSchema(BasicOntology.DATE), PrimitiveSchema.OPTIONAL);

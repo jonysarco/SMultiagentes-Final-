@@ -31,7 +31,6 @@ public class BehaviourSendZeuthen extends Behaviour	{
 			String pelicula_Xj = mensaje.getContent();
 			//System.out.println("pelicula: " + pelicula_Xj + " ---- BEhaviourSendZeuthen ");
 			
-			
 			float Xj = valorPelicula(Coleccion, pelicula_Xj);  //Obtengo mi puntaje para la pelicula ofrecida
 					
 			float Xi = Coleccion.get(contador).getValor(); //Obtengo el puntaje de la pelicula donde tengo el contador

@@ -11,36 +11,42 @@ public class Movie implements Concept{
 	private String director;
 	private String actors;
 	
-	public Movie(String MOVIE_NAME) {
+	public Movie(String movName) {
 		super();
-		this.name = MOVIE_NAME;
-		director="";
-		actors="";
+		this.name = movName;
+		director = "";
+		actors = "";
 	}	
 	
-	public String getMOVIE_NAME() {
+	public String getMovie() {
 		return name;
 	}
-	public void setMOVIE_NAME(String mOVIE_NAME) {
-		name = mOVIE_NAME;
+	
+	public void setMovie(String movName) {
+		name = movName;
 	}
-	public Date getMOVIE_YEAR() {
+	
+	public Date getYear() {
 		return year;
 	}
-	public void setMOVIE_YEAR(Date mOVIE_YEAR) {
-		year = mOVIE_YEAR;
+	
+	public void setYear(Date movYear) {
+		year = movYear;
 	}
-	public String getMOVIE_DIRECTOR() {
+	
+	public String getDirector() {
 		return director;
 	}
-	public void setMOVIE_DIRECTOR(String mOVIE_DIRECTOR) {
-		director = mOVIE_DIRECTOR;
+	
+	public void setDirector(String movDirector) {
+		director = movDirector;
 	}
-	public String getMOVIE_ACTORS() {
+	
+	public String getActors() {
 		return actors;
 	}
-	public void setMOVIE_ACTORS(String mOVIE_ACTORS) {
-		actors = mOVIE_ACTORS;
+	
+	public void setActors(String movActors) {
+		actors = movActors;
 	}
-
 }

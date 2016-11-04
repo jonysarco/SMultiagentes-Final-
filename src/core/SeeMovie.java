@@ -1,10 +1,10 @@
 package core;
 
 import java.util.Date;
-
 import jade.content.AgentAction;
 
 public class SeeMovie implements AgentAction {
+	//Para enviarlo en el manager, enviarlo como una action, con id del agente el see movie correspondiente.
 	private Date date;
 	private Movie movie;
 	
@@ -12,21 +12,26 @@ public class SeeMovie implements AgentAction {
 		super();
 		movie = mOVIE;
 	}
-	public SeeMovie(Date mOVIE_DATE, Movie mOVIE) {
+	
+	public SeeMovie(Date movDate, Movie mov) {
 		super();
-		date = mOVIE_DATE;
-		movie = mOVIE;
+		date = movDate;
+		movie = mov;
 	}
-	public Movie getMOVIE() {
+	
+	public Movie getMovie() {
 		return movie;
 	}
-	public void setMOVIE(Movie mOVIE) {
-		movie = mOVIE;
+	
+	public void setMovie(Movie mov) {
+		movie = mov;
 	}
-	public Date getMOVIE_DATE() {
+	
+	public Date getDate() {
 		return date;
 	}
-	public void setMOVIE_DATE(Date mOVIE_DATE) {
-		date = mOVIE_DATE;
+	
+	public void setDate(Date movDate) {
+		date = movDate;
 	}
 }

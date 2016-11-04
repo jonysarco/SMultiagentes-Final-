@@ -8,7 +8,7 @@ public class IsMyZeuthen implements Predicate{
 
 	public IsMyZeuthen(float value) {
 		super();
-		this.value=value;
+		this.value = value;
 	}
 
 	public float getValue() {

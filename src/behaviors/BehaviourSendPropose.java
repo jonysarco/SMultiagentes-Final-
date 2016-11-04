@@ -3,6 +3,7 @@ package behaviors;
 import java.util.Vector;
 
 import agents.PeliVal;
+import jade.content.ContentManager;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -35,6 +36,8 @@ public class BehaviourSendPropose extends Behaviour {
 			if(contador < Coleccion.size())
 			{
 				respuesta.setPerformative( ACLMessage.PROPOSE );
+				//Aca va la ontologia, content manager para agregarla
+				
 				respuesta.setContent(Coleccion.get(contador).getName()); //mando el nombre de la pelicula para la propuesta
 				myAgent.send(respuesta);
 				estado = 0; //paso a esperar la respuesta

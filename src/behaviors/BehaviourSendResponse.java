@@ -30,15 +30,11 @@ public class BehaviourSendResponse extends Behaviour{
 		if(mensaje != null){
 			fin = true;
 			String pelicula_Xj = mensaje.getContent();
-			
-				
 						
 			int Xj =  valorPelicula(Coleccion, pelicula_Xj);//Obtengo mi puntaje para la pelicula ofrecida
 			int Xi = Coleccion.get(contador).getValor(); //Obtengo el puntaje de la pelicula donde tengo el contador
 			
 			//System.out.println("El valor de la pelicula ofrecida es: " + Xj + " El valor de su pelicula es: " + Xi);
-			
-			
 			ACLMessage respuesta = mensaje.createReply();
 			if(Xi > Xj){
 				//debo calcular el Zeuthen y debo enviar el mensaje que rechazo la propuesta
@@ -73,7 +69,6 @@ public class BehaviourSendResponse extends Behaviour{
 			if(Coleccion.get(i).getName().equals(pelicula_Xj)){
 				return Coleccion.get(i).getValor();
 			}
-				
 		}
 		return -1;
 	}
