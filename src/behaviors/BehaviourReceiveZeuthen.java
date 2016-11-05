@@ -32,8 +32,6 @@ public class BehaviourReceiveZeuthen extends Behaviour {
 				 float ZeuthenB = Float.parseFloat(mensaje.getContent());  //Se obtiene el Zeuthen del otro agente
 				 float ZeuthenA = (float) getDataStore().get(ObjZeuthen); //Obtengo mi Zeuthen
 				 
-				 
-				 
 				 if(ZeuthenA > ZeuthenB){
 					 //Debo pasar al estado de esperar Propuesta
 					 System.out.println(myAgent.getLocalName() + " su Zeuthen es mayor pasa a WaitPropose ---- BeheaviourReceiveZeuthen ");

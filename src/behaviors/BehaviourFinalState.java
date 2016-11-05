@@ -7,7 +7,6 @@ public class BehaviourFinalState extends Behaviour {
 	private static final String decision = "decision";
 	private boolean fin ;
 	
-	
 	public BehaviourFinalState() {
 		super();
 		this.fin = false;

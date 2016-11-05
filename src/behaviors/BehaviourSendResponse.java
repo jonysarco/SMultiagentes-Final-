@@ -2,6 +2,7 @@ package behaviors;
 
 import java.util.Vector;
 
+import agents.Initiator;
 import agents.PeliVal;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
@@ -13,11 +14,11 @@ public class BehaviourSendResponse extends Behaviour{
 	private int estado;
 	private static final Integer Clave = 1;
 	private String decision = "decision";
+	
 	public BehaviourSendResponse(Vector<PeliVal> mov){
 		fin = false;
 		Coleccion = mov;
 	}
-
 	
 	@Override
 	public void action() {

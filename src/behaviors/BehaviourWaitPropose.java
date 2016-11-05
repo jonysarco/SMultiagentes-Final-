@@ -1,5 +1,10 @@
 package behaviors;
 
+import core.IsMyZeuthen;
+import core.Movie;
+import jade.content.ContentElement;
+import jade.content.lang.Codec.CodecException;
+import jade.content.onto.OntologyException;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -23,13 +28,20 @@ public class BehaviourWaitPropose extends Behaviour	{
 		 if(mensaje != null)
 		 {
 			 fin = true;
-			 //getDataStore().put(Clave, mensaje); 
-			 if(mensaje.getPerformative()==ACLMessage.PROPOSE){
-				 getDataStore().put(Clave, mensaje);
-				 System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose ---- BehaviourWaitPropose " );
-	           	 estado=7; //paso al estado SendResponse para evaluar la proposición
+			 ContentElement ce;
+			 if(mensaje.getPerformative() == ACLMessage.PROPOSE){
+				 try {
+					ce = myAgent.getContentManager().extractContent(mensaje);
+					IsMyZeuthen zeuthen = (IsMyZeuthen) ce;
+					Movie mov = zeuthen.getMovie();
+					System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose "+mov.getMovie()+" ---- BehaviourWaitPropose " );
+		           	estado = 7; //paso al estado SendResponse para evaluar la proposición
+				 } catch (CodecException | OntologyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			 }
-			 else if(mensaje.getPerformative()==ACLMessage.CANCEL){
+			 else if(mensaje.getPerformative() == ACLMessage.CANCEL){
 				 System.out.println("El agente " + myAgent.getLocalName() + " recibió un mensaje Cancel ---- BehaviourWaitPropose " );
 				 estado = 12; //paso al estado final porque no hubo acuerdo
 				 getDataStore().put("decision", false); 				 
