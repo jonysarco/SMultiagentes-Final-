@@ -3,6 +3,9 @@ package behaviors;
 import java.util.Vector;
 
 import agents.PeliVal;
+import core.Movie;
+import core.MovieOntology;
+import core.SeeMovie;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -44,13 +47,14 @@ public class BehaviourSendZeuthen extends Behaviour	{
 			getDataStore().put("Zeuthen", Zeuthen);  //Debo pasar el Zeuthen al siguiente estado.
 						
 			//System.out.println(myAgent.getLocalName() + ": ha calculado su Zeuthen " + Zeuthen +" ---- BehaviourSendZeuthen ");
-	//---
+	//---		
 			//Envia mensaje con el Zeuthen calculado al otro agente
 			ACLMessage respuesta = mensaje.createReply();
             respuesta.setPerformative( ACLMessage.INFORM ); //Se envia un mensaje de tipo INFORM al otro Agente
             //Convertimos el Zeuthen a String para poder envíarlo en el contenido del mensaje
             String SZeuthen = Float.toString(Zeuthen);  
             respuesta.setContent(SZeuthen);
+            respuesta.setOntology(MovieOntology.ONTOLOGY_NAME);
             myAgent.send(respuesta); 
             System.out.println(myAgent.getLocalName() +": Envio su Zeuthen: "+Zeuthen+ "al otro agente---- BehaviourSendZeuthen " );
             estado = 4; //paso al siguiente estado con la idea de esperar el Zeuthen del siguiente agente.
