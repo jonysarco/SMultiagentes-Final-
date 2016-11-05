@@ -3,7 +3,12 @@ package behaviors;
 import java.util.Vector;
 
 import agents.PeliVal;
+import core.Movie;
+import core.MovieOntology;
+import core.SeeMovie;
 import jade.content.ContentManager;
+import jade.content.lang.Codec.CodecException;
+import jade.content.onto.OntologyException;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -35,11 +40,21 @@ public class BehaviourSendPropose extends Behaviour {
 			ACLMessage respuesta = mensaje.createReply();
 			if(contador < Coleccion.size())
 			{
-				respuesta.setPerformative( ACLMessage.PROPOSE );
-				//Aca va la ontologia, content manager para agregarla
-				
-				respuesta.setContent(Coleccion.get(contador).getName()); //mando el nombre de la pelicula para la propuesta
-				myAgent.send(respuesta);
+				 Movie mov = new Movie(Coleccion.get(contador).getName());		       	 
+		       	 SeeMovie movies = new SeeMovie(mov);
+		       	 respuesta.setPerformative( ACLMessage.PROPOSE );
+		       	 respuesta.setLanguage(myAgent.getContentManager().getLanguageNames()[0]);
+		       	 respuesta.setOntology(MovieOntology.ONTOLOGY_NAME);
+		       	 respuesta.setSender(myAgent.getAID());
+		       	 
+		       	 try {
+					myAgent.getContentManager().fillContent(respuesta, movies);
+				} catch (CodecException | OntologyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		       	 myAgent.send(respuesta);
+								
 				estado = 0; //paso a esperar la respuesta
 				System.out.println("El agente " + myAgent.getLocalName() + " propuso la pelicula --- SendPropose" + Coleccion.get(contador).getName());
 			}

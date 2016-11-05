@@ -3,6 +3,13 @@ package behaviors;
 import java.util.Vector;
 
 import agents.PeliVal;
+import core.Movie;
+import core.MovieOntology;
+import core.SeeMovie;
+import jade.content.lang.Codec;
+import jade.content.lang.Codec.CodecException;
+import jade.content.onto.Ontology;
+import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
@@ -31,15 +38,25 @@ public class BehaviourStartPropose extends Behaviour	{
 		     //Creo el mensaje 
         	 
         	 getDataStore().put("contador", contador);//envío la posición de la lista que voy recorriendo al siguiente estado
+	       	 
+	       	 
+	       	 Movie mov = new Movie(coleccion.get(contador).getName());
+	       	 
+	       	 
+	       	 SeeMovie movies = new SeeMovie(mov);
 	       	 ACLMessage mensaje = new ACLMessage(ACLMessage.PROPOSE);
+	       	 mensaje.setLanguage(myAgent.getContentManager().getLanguageNames()[0]);
+	       	 mensaje.setOntology(MovieOntology.ONTOLOGY_NAME);
 	       	 mensaje.setSender(myAgent.getAID());
-	       	 mensaje.setLanguage("Español");
 	       	 mensaje.addReceiver(id);
-	       	 mensaje.setContent(coleccion.get(contador).getName()); //Envio el nombre de la película de mi lista
-	      	 mensaje.setConversationId("AB-1");
-	       	 mensaje.setReplyWith("A-001");
-	       	 //Envio el mensaje
+	       	 try {
+				myAgent.getContentManager().fillContent(mensaje, movies);
+			} catch (CodecException | OntologyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	       	 myAgent.send(mensaje);
+	       	 //Envio el mensaje
 	       	 estado = 10;
 	       	 System.out.println(myAgent.getLocalName() + " envia una propuesta: "+coleccion.get(contador).getName()+" al agente: " + id.getLocalName() + " ---- BehaviourStartPropose ");
 	       	 fin = true;

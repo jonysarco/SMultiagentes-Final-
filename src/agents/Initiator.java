@@ -21,7 +21,7 @@ import java.util.Random;
 public class Initiator extends Agent{
 
 	//private Hashtable<String, Integer> peliculas = new Hashtable<String, Integer>();
-	private Codec codec = new SLCodec();
+	public Codec codec = new SLCodec();
 	private Ontology ontology = MovieOntology.getInstance();
 	
 	private Vector<PeliVal> coleccion = new Vector<PeliVal>();
@@ -102,6 +102,11 @@ public class Initiator extends Agent{
 			e.printStackTrace();
 		}
 	}
+	
+	public Codec getCodec(){
+		return codec;
+	}
+	
 	
 	public void imprimirPeliculas(Vector<PeliVal> peliculas)
 	{

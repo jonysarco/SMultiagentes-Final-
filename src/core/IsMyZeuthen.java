@@ -6,10 +6,10 @@ public class IsMyZeuthen implements Predicate{
 
 	private float value;
 
-	public IsMyZeuthen(float value) {
+	/*public IsMyZeuthen(float value) {
 		super();
 		this.value = value;
-	}
+	}*/
 
 	public float getValue() {
 		return value;
