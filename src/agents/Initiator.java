@@ -6,7 +6,11 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
+import core.MovieOntology;
 import fsm.FSM;
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -17,6 +21,9 @@ import java.util.Random;
 public class Initiator extends Agent{
 
 	//private Hashtable<String, Integer> peliculas = new Hashtable<String, Integer>();
+	private Codec codec = new SLCodec();
+	private Ontology ontology = MovieOntology.getInstance();
+	
 	private Vector<PeliVal> coleccion = new Vector<PeliVal>();
 
 	protected void setup()
@@ -37,9 +44,10 @@ public class Initiator extends Agent{
 		coleccion.addElement(new PeliVal("El libro de la selva", value));
 
 		Collections.sort(coleccion); //acá ordeno las peliculas por puntaje descendentemente
-
-		//imprimirPeliculas(coleccion);
 		
+		//Defino el lenguaje y la ontologia
+		getContentManager().registerLanguage(codec);
+		getContentManager().registerOntology(ontology);
 		// Plantilla de descripción que busca el agente
 		DFAgentDescription template = new DFAgentDescription();
 
@@ -61,7 +69,6 @@ public class Initiator extends Agent{
 				// Descripción del agente
 				DFAgentDescription descripcion = new DFAgentDescription();
 				descripcion.setName(getAID()); 
-
 				// Añade dicho servicio a la lista de servicios de la descripción del agente
 				descripcion.addServices(servicio);
 				
@@ -78,12 +85,6 @@ public class Initiator extends Agent{
 					// creo que debo pasar a la maquina de estados, junto con el usuario al que le voy a mandar un mensaje Propose  
 
 					addBehaviour(new FSM(this.coleccion, "Initiator", resultados[i].getName().getLocalName()));
-					
-					
-
-
-
-
 					/*Iterator servicios = resultados[i].getAllServices();
 	        		  int j = 1;
 	        		  while(servicios.hasNext())

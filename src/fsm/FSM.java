@@ -18,19 +18,15 @@ import agents.PeliVal;
 public class FSM extends FSMBehaviour	{
 	
 	public FSM(Vector<PeliVal> mov, String tipoAgente, String responder)	{
-		
 		//Defino Data Store
 		DataStore ds = new DataStore();
 
-				
 		//Defino los comportamientos de la maquina de estados.
-		
 		//Nuevos estados creados TIMOTEO
 		BehaviourWaitProposeStart bwps = new BehaviourWaitProposeStart();
 		bwps.setDataStore(ds);
 		BehaviourStartPropose bstp = new BehaviourStartPropose(mov, responder);
 		bstp.setDataStore(ds);
-		
 		
 		BehaviourFinalState bfs = new BehaviourFinalState();
 		bfs.setDataStore(ds);
