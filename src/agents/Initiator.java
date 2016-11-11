@@ -1,11 +1,7 @@
 package agents;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Vector;
-
 import core.MovieOntology;
 import fsm.FSM;
 import jade.content.lang.Codec;
@@ -48,6 +44,7 @@ public class Initiator extends Agent{
 		//Defino el lenguaje y la ontologia
 		getContentManager().registerLanguage(codec);
 		getContentManager().registerOntology(ontology);
+		
 		// Plantilla de descripción que busca el agente
 		DFAgentDescription template = new DFAgentDescription();
 

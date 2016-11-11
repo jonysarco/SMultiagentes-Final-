@@ -34,7 +34,12 @@ public class MovieOntology extends Ontology {
 	
 	public MovieOntology() {
 		super(ONTOLOGY_NAME, BasicOntology.getInstance());
-		try {			
+		try {	
+			//Agrego Jony
+		//	add(new ConceptSchema(MOVIE),Movie.class);
+		//	add(new PredicateSchema(IS_MY_ZEUTHEN),IsMyZeuthen.class);
+		//	add(new AgentActionSchema(SEE_MOVIE),SeeMovie.class);
+			
 			ConceptSchema cs = new ConceptSchema(MOVIE);
 			cs.add(MOVIE_NAME, (PrimitiveSchema)getSchema(BasicOntology.STRING), PrimitiveSchema.MANDATORY);
 			cs.add(MOVIE_YEAR, (PrimitiveSchema)getSchema(BasicOntology.DATE), PrimitiveSchema.OPTIONAL);

@@ -58,7 +58,7 @@ public class BehaviourStartPropose extends Behaviour	{
 			}
 	       	myAgent.send(mensaje);
 	       	 estado = 10;
-	       	 System.out.println(myAgent.getLocalName() + " envia una propuesta: "+mov.getMovie()+" al agente: " + id.getLocalName() + " ---- BehaviourStartPropose ");
+	       	 System.out.println(myAgent.getLocalName() + " envia una propuesta: "+mov.getName()+" al agente: " + id.getLocalName() + " ---- BehaviourStartPropose ");
 	       	 fin = true;
         }
 	}

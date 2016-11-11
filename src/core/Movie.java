@@ -18,7 +18,7 @@ public class Movie implements Concept{
 		actors = "";
 	}	
 	
-	public String getMovie() {
+	public String getName() {
 		return name;
 	}
 	

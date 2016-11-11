@@ -19,18 +19,18 @@ public class BehaviourSendPropose extends Behaviour {
 	private int estado;
 	private static final Integer Clave = 1;
 	private String decision = "decision";
-	
+
 	public BehaviourSendPropose(Vector<PeliVal> mov){
 		fin = false;
 		Coleccion = mov;
 	}
-	
+
 	@Override
 	public void action() {
 		// TODO Auto-generated method stub
-		
+
 		//System.out.println("*********************************************************************************************");
-		
+
 		//System.out.println("Me fijo que tiene el contador :"+getDataStore().get("contador") + " ---- BehaviourSendPropose ");
 		int contador = (int) getDataStore().get("contador");
 		ACLMessage mensaje = (ACLMessage) getDataStore().get(Clave); //Obtengo el mensaje de propuesta
@@ -39,25 +39,21 @@ public class BehaviourSendPropose extends Behaviour {
 			fin = true;
 			ACLMessage respuesta = mensaje.createReply();
 			if(contador < Coleccion.size())
-			{
-				 Movie mov = new Movie(Coleccion.get(contador).getName());		       	 
-		       	 SeeMovie movies = new SeeMovie(mov);
-		       	 respuesta.setPerformative( ACLMessage.PROPOSE );
-		       	 respuesta.setLanguage(myAgent.getContentManager().getLanguageNames()[0]);
-		       	 respuesta.setOntology(MovieOntology.ONTOLOGY_NAME);
-		       	 respuesta.setSender(myAgent.getAID());
-		       	 
-		       	 try {
+				try {
+					Movie mov = new Movie(Coleccion.get(contador).getName());		       	 
+					SeeMovie movies = new SeeMovie(mov);
+					respuesta.setPerformative( ACLMessage.PROPOSE );
+					respuesta.setLanguage(myAgent.getContentManager().getLanguageNames()[0]);
+					respuesta.setOntology(MovieOntology.ONTOLOGY_NAME);
+					respuesta.setSender(myAgent.getAID());
 					myAgent.getContentManager().fillContent(respuesta, movies);
+					myAgent.send(respuesta);
+					estado = 0; //paso a esperar la respuesta
+					System.out.println("El agente " + myAgent.getLocalName() + " propuso la pelicula --- SendPropose" + Coleccion.get(contador).getName());
 				} catch (CodecException | OntologyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		       	 myAgent.send(respuesta);
-								
-				estado = 0; //paso a esperar la respuesta
-				System.out.println("El agente " + myAgent.getLocalName() + " propuso la pelicula --- SendPropose" + Coleccion.get(contador).getName());
-			}
 			else
 			{
 				getDataStore().put(decision, false);
@@ -72,7 +68,7 @@ public class BehaviourSendPropose extends Behaviour {
 	public boolean done() {
 		return fin;
 	}
-	
+
 	@Override
 	public int onEnd() {
 		return estado;

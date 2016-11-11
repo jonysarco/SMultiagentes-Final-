@@ -34,7 +34,7 @@ public class BehaviourWaitPropose extends Behaviour	{
 					ce = myAgent.getContentManager().extractContent(mensaje);
 					IsMyZeuthen zeuthen = (IsMyZeuthen) ce;
 					Movie mov = zeuthen.getMovie();
-					System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose "+mov.getMovie()+" ---- BehaviourWaitPropose " );
+					System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose "+mov.getName()+" ---- BehaviourWaitPropose " );
 		           	estado = 7; //paso al estado SendResponse para evaluar la proposición
 				 } catch (CodecException | OntologyException e) {
 					// TODO Auto-generated catch block
