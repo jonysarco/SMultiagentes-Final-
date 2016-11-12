@@ -30,6 +30,7 @@ public class BehaviourReceiveZeuthen extends Behaviour {
 				 System.out.println(myAgent.getLocalName() + " recibió un mensaje INFORM ---- BehaviourReceiveZeuthen " );
 	          	 String ObjZeuthen = "Zeuthen";
 				 float ZeuthenB = Float.parseFloat(mensaje.getContent());  //Se obtiene el Zeuthen del otro agente
+				 //System.out.println("EL ZEUTHEN ES DEL OTRO AGENTE ES: "+mensaje.getContent());
 				 float ZeuthenA = (float) getDataStore().get(ObjZeuthen); //Obtengo mi Zeuthen
 				 
 				 if(ZeuthenA > ZeuthenB){
@@ -40,15 +41,12 @@ public class BehaviourReceiveZeuthen extends Behaviour {
 				 else{
 					 //Debo pasar al estado de enviar propuesta y debo incrementar contador;
 					 
-					 
-					 
 					 estado = 5;
 					//Incremento en 1 el contador, esto lo podría hacer directamente en el siguiente estado
 					 ObjZeuthen = "contador"; 
 					 int cont = (int) getDataStore().get(ObjZeuthen);
 					 cont++;
 					 getDataStore().put(ObjZeuthen, cont);
-					 
 					 System.out.println(myAgent.getLocalName() + " su Zeuthen es menor pasa a SendPropose ---- BeheaviourReceiveZeuthen " + cont);
 					 
 				 }
