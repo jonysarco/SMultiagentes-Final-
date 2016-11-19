@@ -9,6 +9,7 @@ import core.SeeMovie;
 import jade.content.ContentManager;
 import jade.content.lang.Codec.CodecException;
 import jade.content.onto.OntologyException;
+import jade.content.onto.basic.Action;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -46,7 +47,8 @@ public class BehaviourSendPropose extends Behaviour {
 					respuesta.setLanguage(myAgent.getContentManager().getLanguageNames()[0]);
 					respuesta.setOntology(MovieOntology.ONTOLOGY_NAME);
 					respuesta.setSender(myAgent.getAID());
-					myAgent.getContentManager().fillContent(respuesta, movies);
+					Action action = new Action(respuesta.getSender(),movies);
+					myAgent.getContentManager().fillContent(respuesta, action);
 					myAgent.send(respuesta);
 					estado = 0; //paso a esperar la respuesta
 					System.out.println("El agente " + myAgent.getLocalName() + " propuso la pelicula --- SendPropose" + Coleccion.get(contador).getName());

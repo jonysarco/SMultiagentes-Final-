@@ -8,6 +8,9 @@ public class SeeMovie implements AgentAction {
 	private Date date;
 	private Movie movie;
 	
+	public SeeMovie(){
+		
+	}
 	public SeeMovie(Movie mOVIE) {
 		super();
 		movie = mOVIE;

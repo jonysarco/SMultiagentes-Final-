@@ -4,17 +4,18 @@ import jade.content.Predicate;
 
 public class IsMyZeuthen implements Predicate{
 
-	private Movie movie;
+	private Float value;
 	
+	public Float getValue() {
+		return value;
+	}
+
+	public void setValue(Float value) {
+		this.value = value;
+	}
+
 	public IsMyZeuthen() {
 		super();
 	}
 
-	public Movie getMovie() {
-		return movie;
-	}
-
-	public void setMovie(Movie mov) {
-		this.movie = mov;
-	}
 }

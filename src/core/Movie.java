@@ -11,6 +11,10 @@ public class Movie implements Concept{
 	private String director;
 	private String actors;
 	
+	public Movie(){
+		
+	}
+	
 	public Movie(String movName) {
 		super();
 		this.name = movName;
@@ -22,7 +26,7 @@ public class Movie implements Concept{
 		return name;
 	}
 	
-	public void setMovie(String movName) {
+	public void setName(String movName) {
 		name = movName;
 	}
 	

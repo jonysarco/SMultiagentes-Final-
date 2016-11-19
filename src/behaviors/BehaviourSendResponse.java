@@ -30,14 +30,27 @@ public class BehaviourSendResponse extends Behaviour{
 		
 		if(mensaje != null){
 			fin = true;
-			String pelicula_Xj = mensaje.getContent();
-						
+			
+			//Podria hacerse despues de recibir el mensaje y poner el See movie si queremos
+			//Tendriamos que hacer lo del SeeMovie
+			
+			
+			String pelicula_Xj = mensaje.getContent();  //Como obtener el nombre de la pelicula??
+			
+			
+			
+			
 			int Xj =  valorPelicula(Coleccion, pelicula_Xj);//Obtengo mi puntaje para la pelicula ofrecida
 			int Xi = Coleccion.get(contador).getValor(); //Obtengo el puntaje de la pelicula donde tengo el contador
 			
 			//System.out.println("El valor de la pelicula ofrecida es: " + Xj + " El valor de su pelicula es: " + Xi);
 			ACLMessage respuesta = mensaje.createReply();
-			if(Xi > Xj){
+			
+			
+			// En reject y accept tendriamos que mandar el getContent si tomaamos todo el mensaje
+			//si tomamos el see movie, extraemos los datos normal.
+			
+			if(Xi > Xj){   //Debemos generar una antologia   
 				//debo calcular el Zeuthen y debo enviar el mensaje que rechazo la propuesta
 				respuesta.setPerformative( ACLMessage.REJECT_PROPOSAL );
 				System.out.println(myAgent.getLocalName() + " Rechaza la propuesta y envía la película " + Coleccion.get(contador).getName() +" ---- BehaviourSendResponse" );

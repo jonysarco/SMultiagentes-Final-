@@ -2,9 +2,11 @@ package behaviors;
 
 import core.IsMyZeuthen;
 import core.Movie;
+import core.SeeMovie;
 import jade.content.ContentElement;
 import jade.content.lang.Codec.CodecException;
 import jade.content.onto.OntologyException;
+import jade.content.onto.basic.Action;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -22,18 +24,22 @@ public class BehaviourWaitPropose extends Behaviour	{
 	public void action() {
 		// TODO Auto-generated method stub
 		//System.out.println(myAgent.getLocalName() + " esta esperando la propuesta de una pelicula ---- BehaviourWaitPropose " );
+		fin = false;
 		ACLMessage mensaje = myAgent.receive();
+		System.out.println(mensaje);
 		if(mensaje != null)	{
 			fin = true;
 			if(mensaje.getPerformative() == ACLMessage.PROPOSE){
 				try{
 					ContentElement ce = myAgent.getContentManager().extractContent(mensaje);
-					IsMyZeuthen zeuthen = (IsMyZeuthen) ce;
-					Movie mov = zeuthen.getMovie();
-					System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose "+mov.getName()+" ---- BehaviourWaitPropose " );
+					Action action = (Action) ce;
+					SeeMovie mov = (SeeMovie) action.getAction();
+					System.out.println(myAgent.getLocalName() + " recibió un mensaje Propose "+mov.getMovie().getName()+" ---- BehaviourWaitPropose " );
 					estado = 7; //paso al estado SendResponse para evaluar la proposición
 					getDataStore().put(Clave, mensaje);
-				}catch (Exception e) {}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			else if(mensaje.getPerformative() == ACLMessage.CANCEL){
 				System.out.println("El agente " + myAgent.getLocalName() + " recibió un mensaje Cancel ---- BehaviourWaitPropose " );
@@ -41,7 +47,7 @@ public class BehaviourWaitPropose extends Behaviour	{
 				getDataStore().put("decision", false); 				 
 			}   
 		}else{
-			estado=13; // me quedo esperando a que me llegue una propuesta
+			//estado=13; // me quedo esperando a que me llegue una propuesta
 			System.out.println(myAgent.getLocalName() +": se queda ciclando  ----  BehaviourWaitPropose ");
 			block();                 
 		}
@@ -54,7 +60,13 @@ public class BehaviourWaitPropose extends Behaviour	{
 
 	@Override
 	public int onEnd() {
+		System.out.println(estado);
 		return estado;
+	}
+	
+	@Override
+	public void reset() {
+		fin = false;
 	}
 
 }

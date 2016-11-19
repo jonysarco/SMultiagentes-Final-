@@ -78,7 +78,9 @@ public class FSM extends FSMBehaviour	{
 		this.registerTransition("Send Response", "Send Zeuthen", 8);
 		this.registerTransition("Send Response", "Final State", 9);
 		this.registerTransition("Start Initiator", "Wait Response", 10);
-		this.registerTransition("Wait Propose", "Final State", 12);
+		//Por cada waite, para resetear.
+		String[] toBeReset = {"Wait Propose"};
+		this.registerTransition("Wait Propose", "Final State", 12, toBeReset);
 		this.registerTransition("Wait Propose", "Wait Propose", 13);
 		this.registerTransition("Wait Response", "Wait Response", 14);
 		this.registerTransition("Receive Zeuthen", "Receive Zeuthen", 15);
