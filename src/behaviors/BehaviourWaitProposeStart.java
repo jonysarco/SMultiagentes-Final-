@@ -46,7 +46,7 @@ public class BehaviourWaitProposeStart extends Behaviour	{
          {
         	 //continua esperando recibir un mensaje, cicla en ese estado
         	
-        	 estado=16;
+        	 //estado=16;
              System.out.println(myAgent.getLocalName() +"Quedo esperando ---- BehaviourWaitProposeStart");
              block();                 
          }		

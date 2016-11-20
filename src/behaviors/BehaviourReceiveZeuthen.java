@@ -23,7 +23,7 @@ public class BehaviourReceiveZeuthen extends Behaviour {
 		// TODO Auto-generated method stub
 		
 		
-		ACLMessage mensaje = myAgent.receive(); 
+		ACLMessage mensaje = myAgent.blockingReceive(); 
 		if(mensaje != null){
 			fin = true;
 			if(mensaje.getPerformative()==ACLMessage.INFORM){ 
@@ -56,9 +56,9 @@ public class BehaviourReceiveZeuthen extends Behaviour {
 			}
 		}
 		else{
-			estado = 15;
+			//estado = 15;
 			System.out.println(myAgent.getLocalName() + " esta esperando recibir el Zeuthen ---- BehaviourReceiveZeuthen ");
-			block();
+			//block();
 		}
     }
 
@@ -70,6 +70,10 @@ public class BehaviourReceiveZeuthen extends Behaviour {
 	@Override
 	public boolean done() {
 		return fin;
+	}
+	
+	public void reset(){
+		fin = false;
 	}
 
 }

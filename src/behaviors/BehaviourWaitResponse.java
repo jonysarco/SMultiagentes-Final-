@@ -3,6 +3,11 @@ package behaviors;
 import java.util.Vector;
 
 import agents.PeliVal;
+import core.SeeMovie;
+import jade.content.ContentElement;
+import jade.content.lang.Codec.CodecException;
+import jade.content.onto.OntologyException;
+import jade.content.onto.basic.Action;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -19,7 +24,7 @@ public class BehaviourWaitResponse extends Behaviour {
 		
 	@Override
 	public void action() {
-		ACLMessage mensaje = myAgent.receive();  //Recibo el mensaje de respuesta del otro agente
+		ACLMessage mensaje = myAgent.blockingReceive();  //Recibo el mensaje de respuesta del otro agente
         if (mensaje != null)
         {
         	
@@ -30,9 +35,19 @@ public class BehaviourWaitResponse extends Behaviour {
 	           	//Pasar a estado final
             	System.out.println(myAgent.getLocalName() + ": recibió un mensaje de aceptacion :  ---- BehaviourWaitResponse");
             	String movie = "Pelicula"; 
-            	estado=2;
-	           	getDataStore().put(movie, mensaje.getContent());
-	           	getDataStore().put("decision", true); //paso al estado final avisando que se acepto la pelicula
+            	ContentElement ce;
+				try {
+					ce = myAgent.getContentManager().extractContent(mensaje);
+					Action action = (Action) ce;
+					SeeMovie mov = (SeeMovie) action.getAction();
+		           	getDataStore().put(movie, mov.getMovie().getName());
+		           	getDataStore().put("decision", true); //paso al estado final avisando que se acepto la pelicula
+		           	estado=2;
+				} catch (CodecException | OntologyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
             }                
             else
             { 
@@ -46,9 +61,9 @@ public class BehaviourWaitResponse extends Behaviour {
         }
         else
         {
-        	estado = 14; //debo ciclar en el estado esperando la llegada del mensaje de respuesta
+        	//estado = 14; //debo ciclar en el estado esperando la llegada del mensaje de respuesta
             System.out.println(myAgent.getLocalName() + " esta esperando el mansaje de RESPUESTA ---- BehaviourWaitResponse ");
-            block();
+            //block();
             
         }		
 		

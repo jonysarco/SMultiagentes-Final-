@@ -66,25 +66,28 @@ public class FSM extends FSMBehaviour	{
 		this.registerLastState(bfs, "Final State");
 		//this.registerState(bwps, "Start Init");
 
+		//Por cada waite, para resetear.
+		String[] toBeReset = {"Wait Propose", "Send Propose", "Wait Response", "Send Zeuthen", "Receive Zeuthen"};
+		
+		
 		//Defino transicion de estados.
 		this.registerTransition("Send Propose", "Wait Response", 0);
 		this.registerTransition("Send Propose", "Final State", 1);
 		this.registerTransition("Wait Response", "Final State", 2);
 		this.registerTransition("Wait Response", "Send Zeuthen", 3);
 		this.registerTransition("Send Zeuthen", "Receive Zeuthen", 4);
-		this.registerTransition("Receive Zeuthen", "Send Propose", 5);
+		this.registerTransition("Receive Zeuthen", "Send Propose", 5, toBeReset);
 		this.registerTransition("Receive Zeuthen", "Wait Propose", 6);
 		this.registerTransition("Wait Propose", "Send Response", 7);
 		this.registerTransition("Send Response", "Send Zeuthen", 8);
 		this.registerTransition("Send Response", "Final State", 9);
 		this.registerTransition("Start Initiator", "Wait Response", 10);
-		//Por cada waite, para resetear.
-		String[] toBeReset = {"Wait Propose"};
-		this.registerTransition("Wait Propose", "Final State", 12, toBeReset);
-		this.registerTransition("Wait Propose", "Wait Propose", 13);
-		this.registerTransition("Wait Response", "Wait Response", 14);
-		this.registerTransition("Receive Zeuthen", "Receive Zeuthen", 15);
-		this.registerTransition("Start Responder", "Start Responder", 16);
+		
+		this.registerTransition("Wait Propose", "Final State", 12);
+		//this.registerTransition("Wait Propose", "Wait Propose", 13);
+		//this.registerTransition("Wait Response", "Wait Response", 14);
+		//this.registerTransition("Receive Zeuthen", "Receive Zeuthen", 15);
+		//this.registerTransition("Start Responder", "Start Responder", 16);
 		this.registerTransition("Start Responder", "Send Response", 17);
 	}
 }

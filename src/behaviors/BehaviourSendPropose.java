@@ -51,9 +51,10 @@ public class BehaviourSendPropose extends Behaviour {
 					myAgent.getContentManager().fillContent(respuesta, action);
 					myAgent.send(respuesta);
 					estado = 0; //paso a esperar la respuesta
-					System.out.println("El agente " + myAgent.getLocalName() + " propuso la pelicula --- SendPropose" + Coleccion.get(contador).getName());
-				} catch (CodecException | OntologyException e) {
+					System.out.println("El agente " + myAgent.getLocalName() + " propuso la pelicula --- SendPropose " + Coleccion.get(contador).getName());
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					//CodecException | OntologyException e
 					e.printStackTrace();
 				}
 			else
